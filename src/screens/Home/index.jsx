@@ -1,35 +1,20 @@
 import React from "react";
+import { Box } from "@mui/material";
+import homeImage from "../../assets/home_bg.png"; // Импортируем изображение
 
 const Home = () => {
   return (
-    <div className="home">
-      {/* Шапка страницы */}
-      <header className="home-header">
-        <h1>Добро пожаловать на главную страницу!</h1>
-        <p>Описание или слоган вашего приложения</p>
-      </header>
-
-      {/* Основное содержание страницы */}
-      <main className="home-content">
-        <section className="featured-section">
-          <h2>Основной раздел</h2>
-          <p>
-            Здесь можно разместить какую-то важную информацию, новости или
-            главные функции вашего приложения.
-          </p>
-        </section>
-
-        <section className="additional-info">
-          <h2>Дополнительная информация</h2>
-          <p>Другие разделы или ссылки на интересные страницы.</p>
-        </section>
-      </main>
-
-      {/* Подвал страницы */}
-      <footer className="home-footer">
-        <p>© {new Date().getFullYear()} Все права защищены.</p>
-      </footer>
-    </div>
+    <Box
+      component="div"
+      sx={{
+        width: "100%", // На всю ширину
+        height: "400px", // Задайте высоту на ваше усмотрение
+        backgroundImage: `url(${homeImage})`,
+        backgroundSize: "cover", // Изображение покрывает контейнер
+        backgroundPosition: "center", // Центрируем изображение
+        backgroundRepeat: "no-repeat", // Избегаем повторения изображения
+      }}
+    />
   );
 };
 

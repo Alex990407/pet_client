@@ -1,44 +1,48 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu"; // Убедитесь, что этот импорт работает
 import { Box } from "@mui/material";
+import logo from "../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        {/* Иконка меню */}
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
+  const navigate = useNavigate();
 
-        {/* Название сайта или логотип */}
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Мой Логотип
-        </Typography>
+  return (
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: "white", // Устанавливаем белый цвет фона
+        color: "black", // Устанавливаем цвет текста как черный
+        boxShadow: "none", // Убираем тень, если необходимо
+      }}
+    >
+      <Toolbar>
+        {/* Логотип */}
+        <img
+          src={logo}
+          alt="Логотип"
+          style={{ height: "40px", marginRight: "16px" }}
+        />
 
         {/* Навигационные ссылки */}
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button color="inherit" href="/">
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            flexGrow: 1,
+            justifyContent: "center",
+          }}
+        >
+          <Button color="inherit" onClick={() => navigate("/")}>
             Главная
           </Button>
-          <Button color="inherit" href="/about">
-            О нас
+          <Button color="inherit" onClick={() => navigate("/сategories")}>
+            Categories
           </Button>
-          <Button color="inherit" href="/services">
-            Услуги
-          </Button>
-          <Button color="inherit" href="/contact">
-            Контакты
+          <Button color="inherit" onClick={() => navigate("/products")}>
+            Products
           </Button>
         </Box>
 
