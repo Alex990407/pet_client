@@ -4,6 +4,8 @@ import Home from "../screens/Home/index";
 import Categories from "../screens/Categories/index";
 import Products from "../screens/Products/index";
 import Header from "../components/Header/index";
+import Footer from "../components/Footer/index";
+import AllSales from "../screens/AllSales/index";
 
 export const AppNavigator = () => {
   return (
@@ -11,13 +13,11 @@ export const AppNavigator = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-      </Routes>
-      <Routes>
         <Route path="/сategories" element={<Categories />} />
+        <Route path="/allProducts" element={<Products />} />
+        <Route path="/allSales" element={<AllSales />} />
       </Routes>
-      <Routes>
-        <Route path="/products" element={<Products />} />
-      </Routes>
+      <Footer />
     </Router>
   );
 };

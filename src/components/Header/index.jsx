@@ -4,6 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import logo from "../../assets/logo.png";
+import cartIcon from "../../assets/cartIcon.svg";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -16,6 +17,7 @@ const Header = () => {
         backgroundColor: "white", // Устанавливаем белый цвет фона
         color: "black", // Устанавливаем цвет текста как черный
         boxShadow: "none", // Убираем тень, если необходимо
+        borderBottom: "2px solid #ccc",
       }}
     >
       <Toolbar>
@@ -36,18 +38,27 @@ const Header = () => {
           }}
         >
           <Button color="inherit" onClick={() => navigate("/")}>
-            Главная
+            Main Page
           </Button>
           <Button color="inherit" onClick={() => navigate("/сategories")}>
             Categories
           </Button>
-          <Button color="inherit" onClick={() => navigate("/products")}>
-            Products
+          <Button color="inherit" onClick={() => navigate("/allProducts")}>
+            All products
+          </Button>
+          <Button color="inherit" onClick={() => navigate("/allSales")}>
+            All sales
           </Button>
         </Box>
 
-        {/* Кнопка Войти */}
-        <Button color="inherit">Войти</Button>
+        {/* Иконка корзины */}
+        <Box
+          component="img"
+          src={cartIcon} // Используем иконку корзины
+          alt="Cart"
+          sx={{ height: 44, width: 48, cursor: "pointer" }} // Задаем размер и стиль
+          onClick={() => navigate("/cart")} // Переход на страницу корзины
+        />
       </Toolbar>
     </AppBar>
   );
