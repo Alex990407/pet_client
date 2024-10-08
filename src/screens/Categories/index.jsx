@@ -1,12 +1,16 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import CategoriesComponent from "../../components/CategoriesComponent";
+import BreadcrumbsComponent from "../../components/BreadcrumbsComponent";
 
 const Categories = () => {
   return (
-    <Box sx={{ padding: 2 }}>
+    <BreadcrumbsComponent>
+      {/* Контейнер для кнопок */}
+
       <CategoriesComponent />
-    </Box>
+    </BreadcrumbsComponent>
   );
 };
 

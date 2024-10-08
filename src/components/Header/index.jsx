@@ -22,11 +22,16 @@ const Header = () => {
     >
       <Toolbar>
         {/* Логотип */}
-        <img
-          src={logo}
-          alt="Логотип"
-          style={{ height: "40px", marginRight: "16px" }}
-        />
+        <Box
+          sx={{ cursor: "pointer" }} // Добавляем стиль курсора
+          onClick={() => navigate("/")} // Добавляем обработчик клика
+        >
+          <img
+            src={logo}
+            alt="Логотип"
+            style={{ height: "40px", marginRight: "16px" }}
+          />
+        </Box>
 
         {/* Навигационные ссылки */}
         <Box
@@ -40,7 +45,7 @@ const Header = () => {
           <Button color="inherit" onClick={() => navigate("/")}>
             Main Page
           </Button>
-          <Button color="inherit" onClick={() => navigate("/сategories")}>
+          <Button color="inherit" onClick={() => navigate("/categories")}>
             Categories
           </Button>
           <Button color="inherit" onClick={() => navigate("/allProducts")}>
