@@ -73,13 +73,22 @@ const Home = () => {
       </Box>
 
       {/* Новый блок с категориями */}
-      <TitleLineButton
-        title="Categories"
-        linkLabel="All categories"
-        linkUrl="/categories"
+      <Box
+        sx={{
+          padding: "0 40px", // Добавляем отступы 20px по бокам и 40px сверху и снизу
+          maxWidth: "1360px", // Максимальная ширина для большого экрана
+          maxHeight: "500px",
+          margin: "0 auto", // Центрируем блок
+        }}
       >
-        <CategoriesComponent limit={4} /> {/* Ограничиваем категории до 4 */}
-      </TitleLineButton>
+        <TitleLineButton
+          title="Categories"
+          linkLabel="All categories"
+          linkUrl="/categories"
+        >
+          <CategoriesComponent limit={4} /> {/* Ограничиваем категории до 4 */}
+        </TitleLineButton>
+      </Box>
     </>
   );
 };

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Card, CardMedia, CardContent, Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom"; // Импортируем useNavigate
 import axios from "axios"; // Импортируем Axios
+// import ContWithButton from "../TitleLineButton";
+import { useNavigate } from "react-router-dom";
 
 const CategoriesComponent = ({ limit }) => {
   const [categories, setCategories] = useState([]);
-  const navigate = useNavigate(); // Инициализируем useNavigate
+  const navigate = useNavigate();
 
   // Запрос на бэкенд для получения данных о категориях
   useEffect(() => {
     axios
       .get("http://localhost:3333/categories/all")
       .then((response) => {
+        // Если передан лимит, отрезаем массив до нужного количества категорий
         const fetchedCategories = limit
           ? response.data.slice(0, limit)
           : response.data;
@@ -22,9 +24,9 @@ const CategoriesComponent = ({ limit }) => {
       });
   }, [limit]);
 
-  // Обработчик клика на карточку категории
+  // Функция для перехода на страницу с продуктами категории
   const handleCategoryClick = (categoryId) => {
-    navigate(`/category-products/${categoryId}`); // Переход на страницу с товарами категории
+    navigate(`/category-products/${categoryId}`); // Переход на страницу с параметром categoryId
   };
 
   return (
@@ -33,9 +35,9 @@ const CategoriesComponent = ({ limit }) => {
         <Grid item key={category.id} xs={12} sm={6} md={3}>
           <Card
             sx={{
-              boxShadow: "none",
-              textAlign: "center",
-              cursor: "pointer", // Добавляем указатель мыши, чтобы показать кликабельность
+              boxShadow: "none", // Убираем границы и тени
+              textAlign: "center", // Центрируем содержимое
+              cursor: "pointer",
             }}
             onClick={() => handleCategoryClick(category.id)} // Добавляем обработчик клика
           >
@@ -44,13 +46,13 @@ const CategoriesComponent = ({ limit }) => {
               image={"http://localhost:3333/" + category.image} // URL изображения категории
               alt={category.title}
               sx={{
-                height: "350px",
-                width: "315px",
                 borderRadius: "8px",
-                objectFit: "contain",
-                objectPosition: "center",
-                margin: "0 auto",
-                backgroundColor: "#f0f0f0",
+                objectFit: "contain", // Изображение не обрезается и полностью вмещается
+                objectPosition: "center", // Центрируем изображение
+                margin: "0 auto", // Центрируем элемент
+                backgroundColor: "#f0f0f0", // Цвет фона
+                maxHeight: "350px", // Ограничиваем максимальную высоту
+                width: "100%",
               }}
             />
             <CardContent>
@@ -58,10 +60,10 @@ const CategoriesComponent = ({ limit }) => {
                 variant="h6"
                 component="div"
                 sx={{
-                  fontFamily: "Montserrat, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "1rem",
-                  marginTop: "10px",
+                  fontFamily: "Montserrat, sans-serif", // Применяем шрифт
+                  fontWeight: 500, // Устанавливаем Medium вес шрифта
+                  fontSize: "1rem", // Размер текста
+                  marginTop: "10px", // Отступ сверху
                 }}
               >
                 {category.title}
