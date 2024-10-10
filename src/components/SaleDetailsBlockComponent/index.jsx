@@ -12,9 +12,11 @@ const SaleDetailsBlockComponent = ({ price, discountPrice }) => {
   return (
     <Box
       sx={{
+        width: "45px",
+        height: "25px",
         backgroundColor: "blue", // Синий фон
         color: "white", // Белый текст
-        borderRadius: "8px", // Скругленные углы
+        borderRadius: "6px", // Скругленные углы
         padding: "8px 16px", // Внутренние отступы
         display: "inline-block", // Блок занимает только необходимое место
         textAlign: "center", // Центрируем текст
@@ -29,7 +31,7 @@ const SaleDetailsBlockComponent = ({ price, discountPrice }) => {
           fontFamily: "Montserrat, sans-serif", // Шрифт
         }}
       >
-        {discountPercentage}% OFF
+        {discountPercentage}%
       </Typography>
     </Box>
   );

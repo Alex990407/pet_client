@@ -2,24 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-const BreadcrumbsComponent = ({ children }) => {
+const BreadcrumbsComponent = ({ children, categoryTitle }) => {
   const navigate = useNavigate();
   return (
     <Box sx={{ padding: 2 }}>
-      {/* Заголовок Categories */}
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        sx={{
-          textAlign: "left",
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 700,
-        }}
-      >
-        Categories
-      </Typography>
-
       <Box
         sx={{
           display: "flex",
@@ -66,6 +52,23 @@ const BreadcrumbsComponent = ({ children }) => {
           </Button>
         </Link>
       </Box>
+      {/* Название текущей категории под кнопками */}
+
+      {/* Заголовок Categories */}
+
+      <Typography
+        variant="h4"
+        component="h2"
+        sx={{
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: "bold", // Используем bold для жирного текста
+          fontSize: "2rem",
+          marginBottom: "20px", // Отступ снизу для заголовка
+          textAlign: "left", // Выровняем по левому краю
+        }}
+      >
+        {categoryTitle}
+      </Typography>
 
       {children}
     </Box>
