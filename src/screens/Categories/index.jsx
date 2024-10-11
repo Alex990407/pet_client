@@ -7,8 +7,6 @@ import BreadcrumbsComponent from "../../components/BreadcrumbsComponent";
 const Categories = () => {
   return (
     <BreadcrumbsComponent>
-      {/* Контейнер для кнопок */}
-
       <CategoriesComponent />
     </BreadcrumbsComponent>
   );

@@ -1,12 +1,12 @@
 import React from "react";
+import BreadcrumbsComponent from "../../components/BreadcrumbsComponent";
+import DiscountedProducts from "../../components/DiscountedProductsComponent/index";
 
 const AllSales = () => {
   return (
-    <div className="home">
-      <header className="header">
-        <h1>AllSales</h1>
-      </header>
-    </div>
+    <BreadcrumbsComponent>
+      <DiscountedProducts />
+    </BreadcrumbsComponent>
   );
 };
 

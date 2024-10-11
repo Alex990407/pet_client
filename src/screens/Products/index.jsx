@@ -1,14 +1,12 @@
 import React from "react";
+import BreadcrumbsComponent from "../../components/BreadcrumbsComponent";
+import AllProducts from "../../components/GetAllProductsComponent/index";
 
 const Products = () => {
   return (
-    <div className="home">
-      {/* Шапка страницы */}
-      <header className="home-header">
-        <h1>Добро пожаловать на главную страницу!</h1>
-        <p>Описание или слоган вашего приложения</p>
-      </header>
-    </div>
+    <BreadcrumbsComponent>
+      <AllProducts />
+    </BreadcrumbsComponent>
   );
 };
 
