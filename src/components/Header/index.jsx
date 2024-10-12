@@ -1,39 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
+import CartIconComponent from "../CartIconComponent";
 import logo from "../../assets/logo.png";
-import cartIcon from "../../assets/cartIcon.svg";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  const updateCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    setCartItemCount(totalItems);
+  };
+
+  useEffect(() => {
+    updateCart();
+  }, []);
 
   return (
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "white", // Устанавливаем белый цвет фона
-        color: "black", // Устанавливаем цвет текста как черный
-        boxShadow: "none", // Убираем тень, если необходимо
+        backgroundColor: "white",
+        color: "black",
+        boxShadow: "none",
         borderBottom: "2px solid #ccc",
       }}
     >
       <Toolbar>
-        {/* Логотип */}
-        <Box
-          sx={{ cursor: "pointer" }} // Добавляем стиль курсора
-          onClick={() => navigate("/")} // Добавляем обработчик клика
-        >
+        <Box sx={{ cursor: "pointer" }} onClick={() => navigate("/")}>
           <img
             src={logo}
-            alt="Логотип"
+            alt="Logo"
             style={{ height: "40px", marginRight: "16px" }}
           />
         </Box>
-
-        {/* Навигационные ссылки */}
         <Box
           sx={{
             display: "flex",
@@ -49,21 +54,13 @@ const Header = () => {
             Categories
           </Button>
           <Button color="inherit" onClick={() => navigate("/allProducts")}>
-            All products
+            All Products
           </Button>
           <Button color="inherit" onClick={() => navigate("/allSales")}>
-            All sales
+            All Sales
           </Button>
         </Box>
-
-        {/* Иконка корзины */}
-        <Box
-          component="img"
-          src={cartIcon} // Используем иконку корзины
-          alt="Cart"
-          sx={{ height: 44, width: 48, cursor: "pointer" }} // Задаем размер и стиль
-          onClick={() => navigate("/cart")} // Переход на страницу корзины
-        />
+        <CartIconComponent cartItemCount={cartItemCount} />
       </Toolbar>
     </AppBar>
   );

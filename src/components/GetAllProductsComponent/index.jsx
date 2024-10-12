@@ -10,10 +10,12 @@ import {
 import axios from "axios";
 import SaleDetailsBlockComponent from "../../components/SaleDetailsBlockComponent"; // Компонент скидки
 import ProductFilterComponent from "../ProductFilterComponent";
+import { useNavigate } from "react-router-dom";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]); // Состояние для отфильтрованных продуктов
+  const navigate = useNavigate();
 
   // Запрос на бэкенд для получения всех продуктов
 
@@ -60,6 +62,10 @@ const AllProducts = () => {
     setFilteredProducts(filtered); // Обновляем состояние отфильтрованных продуктов
   };
 
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <Box sx={{ padding: { xs: "10px", sm: "20px" } }}>
       {/* Заголовок страницы */}
@@ -93,7 +99,9 @@ const AllProducts = () => {
                 boxShadow: "none",
                 textAlign: "center",
                 position: "relative", // Позиционируем карточку
+                cursor: "pointer",
               }}
+              onClick={() => handleProductClick(product.id)} // Добавляем обработчик клика
             >
               {/* Компонент со скидкой */}
               {product.discont_price && (

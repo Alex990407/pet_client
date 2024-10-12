@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import { Box, Button } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom"; // Импортируем useParams
+import React from "react";
+import { useParams } from "react-router-dom";
 import BreadcrumbsComponent from "../../components/BreadcrumbsComponent";
 import CategoryProductsComponent from "../../components/CategoryProductsComponent";
 
 const CategoryProducts = () => {
-  const { id } = useParams(); // Получаем id из параметров маршрута
+  const { id } = useParams();
 
   return (
     <BreadcrumbsComponent>
