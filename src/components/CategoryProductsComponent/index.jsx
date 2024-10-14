@@ -10,11 +10,13 @@ import {
 import axios from "axios";
 import SaleDetailsBlockComponent from "../SaleDetailsBlockComponent";
 import ProductFilterComponent from "../ProductFilterComponent"; // Импортируем компонент фильтрации
+import { useNavigate } from "react-router-dom"; // Импортируем useNavigate для навигации
 
 const CategoryProductsComponent = ({ id, limit }) => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const navigate = useNavigate();
 
   // Запрос на бэкенд для получения продуктов по категории
   useEffect(() => {
@@ -81,6 +83,11 @@ const CategoryProductsComponent = ({ id, limit }) => {
     setFilteredProducts(filtered); // Обновляем состояние отфильтрованных продуктов
   };
 
+  // Функция для навигации по продукту при клике
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`); // Переход на страницу продукта
+  };
+
   return (
     <Box sx={{ padding: { xs: "10px", sm: "20px" } }}>
       {/* Заголовок категории вынесен над продуктами */}
@@ -99,6 +106,7 @@ const CategoryProductsComponent = ({ id, limit }) => {
       </Typography>
       {/* Добавляем компонент фильтрации */}
       <ProductFilterComponent onFilter={handleFilter} /> {/* Сетка продуктов */}
+      {/* Сетка продуктов */}
       <Grid container spacing={2}>
         {filteredProducts.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={3} lg={3}>
@@ -111,7 +119,9 @@ const CategoryProductsComponent = ({ id, limit }) => {
                 boxShadow: "none",
                 textAlign: "center",
                 position: "relative", // Позиционируем карточку
+                cursor: "pointer",
               }}
+              onClick={() => handleProductClick(product.id)} // Добавляем обработчик клика
             >
               {/* Компонент со скидкой */}
               {product.discont_price && (

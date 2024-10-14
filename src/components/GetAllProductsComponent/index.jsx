@@ -21,7 +21,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3333/products/all") // Путь к вашему API для получения всех продуктов
+      .get("http://localhost:3333/products/all") // Путь к API для получения всех продуктов
       .then((response) => {
         setProducts(response.data); // Сохраняем полученные данные в состоянии
         setFilteredProducts(response.data); // Инициализируем отфильтрованные продукты
@@ -63,7 +63,7 @@ const AllProducts = () => {
   };
 
   const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
+    navigate(`/product/${productId}`); // Используем обратные кавычки для шаблонной строки
   };
 
   return (
