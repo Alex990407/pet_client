@@ -63,37 +63,42 @@ const ProductComponent = ({ product, updateCart }) => {
               {product.title}
             </Typography>
 
-            {/* Цена со скидкой */}
+            {/* Цена со скидкой в одном контейнере */}
             <Box display="flex" alignItems="center" marginY={2}>
-              {product.discont_price ? (
-                <>
-                  <Typography variant="h4" fontWeight="bold" color="black">
-                    ${product.discont_price}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    color="textSecondary"
-                    sx={{
-                      textDecoration: "line-through",
-                      marginLeft: 1,
-                      fontSize: "1.2rem",
-                    }}
-                  >
+              <Box display="flex" alignItems="flex-end">
+                {product.discont_price ? (
+                  <>
+                    <Typography variant="h4" fontWeight="bold" color="black">
+                      ${product.discont_price}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      color="textSecondary"
+                      sx={{
+                        textDecoration: "line-through",
+                        marginLeft: 1,
+                        fontSize: "1.2rem",
+                      }}
+                    >
+                      ${product.price}
+                    </Typography>
+                  </>
+                ) : (
+                  <Typography variant="h5" fontWeight="bold" color="black">
                     ${product.price}
                   </Typography>
-
-                  {/* Добавляем компонент SaleDetailsBlockComponent  */}
-                  <Box sx={{ marginLeft: "8px" }}>
-                    <SaleDetailsBlockComponent
-                      price={product.price}
-                      discountPrice={product.discont_price}
-                    />
-                  </Box>
-                </>
-              ) : (
-                <Typography variant="h5" fontWeight="bold" color="black">
-                  ${product.price}
-                </Typography>
+                )}
+              </Box>
+              {/* Добавляем компонент SaleDetailsBlockComponent */}
+              {product.discont_price && (
+                <Box sx={{ marginLeft: "8px", marginBottom: 1 }}>
+                  {" "}
+                  {/* Поднимаем SaleDetailsBlockComponent немного выше */}
+                  <SaleDetailsBlockComponent
+                    price={product.price}
+                    discountPrice={product.discont_price}
+                  />
+                </Box>
               )}
             </Box>
 

@@ -9,6 +9,7 @@ import AllSales from "../screens/AllSales/index";
 import Product from "../screens/Product/index";
 import Cart from "../screens/CartPage";
 import CategoryProducts from "../screens/CategoryProducts/index";
+import NotFound from "../components/NotFoundComponent/NotFound";
 
 export const AppNavigator = () => {
   return (
@@ -22,6 +23,8 @@ export const AppNavigator = () => {
         <Route path="/category-products/:id" element={<CategoryProducts />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<NotFound />} />{" "}
+        {/* Добавляем маршрут для 404 */}
       </Routes>
       <Footer />
     </Router>
