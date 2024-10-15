@@ -11,7 +11,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-const CategoriesComponent = ({ limit }) => {
+const CategoriesComponent = ({ limit, hideTitle }) => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
@@ -38,20 +38,22 @@ const CategoriesComponent = ({ limit }) => {
 
   return (
     <Box sx={{ padding: "20px" }}>
-      {/* Заголовок страницы */}
-      <Typography
-        variant="h4"
-        component="h2"
-        sx={{
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: "bold",
-          fontSize: { xs: "1.5rem", sm: "2rem" }, // Адаптивный заголовок
-          marginBottom: "20px",
-          textAlign: "left",
-        }}
-      >
-        Categories
-      </Typography>
+      {/* Заголовок страницы (проверяем пропс hideTitle) */}
+      {!hideTitle && (
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: "bold",
+            fontSize: { xs: "1.5rem", sm: "2rem" }, // Адаптивный заголовок
+            marginBottom: "20px",
+            textAlign: "left",
+          }}
+        >
+          Categories
+        </Typography>
+      )}
 
       {/* Сетка с категориями */}
       <Grid container spacing={2}>

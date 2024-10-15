@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Typography,
@@ -7,36 +7,15 @@ import {
   CardMedia,
   CardContent,
   Box,
-  Divider,
   IconButton,
   TextField,
 } from "@mui/material";
-import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import SaleDetailsBlockComponent from "../../components/SaleDetailsBlockComponent/index"; // Импортируем компонент для отображения процентов скидки
 
-const ProductComponent = ({ productId, updateCart }) => {
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const ProductComponent = ({ product, updateCart }) => {
   const [quantity, setQuantity] = useState(1); // Состояние для количества
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3333/products/${productId}`
-        );
-        setProduct(response.data[0]);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to load product data");
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, [productId]);
 
   // Увеличиваем или уменьшаем количество товаров
   const handleIncrease = () => {
@@ -67,14 +46,6 @@ const ProductComponent = ({ productId, updateCart }) => {
     updateCart(); // Обновляем отображение корзины
   };
 
-  if (loading) {
-    return <Typography>Loading...</Typography>;
-  }
-
-  if (error) {
-    return <Typography color="error">{error}</Typography>;
-  }
-
   return (
     <Card sx={{ display: "flex", padding: 2 }}>
       <Grid container spacing={2}>
@@ -96,7 +67,7 @@ const ProductComponent = ({ productId, updateCart }) => {
             <Box display="flex" alignItems="center" marginY={2}>
               {product.discont_price ? (
                 <>
-                  <Typography variant="h5" fontWeight="bold" color="primary">
+                  <Typography variant="h4" fontWeight="bold" color="black">
                     ${product.discont_price}
                   </Typography>
                   <Typography
@@ -110,15 +81,23 @@ const ProductComponent = ({ productId, updateCart }) => {
                   >
                     ${product.price}
                   </Typography>
+
+                  {/* Добавляем компонент SaleDetailsBlockComponent  */}
+                  <Box sx={{ marginLeft: "8px" }}>
+                    <SaleDetailsBlockComponent
+                      price={product.price}
+                      discountPrice={product.discont_price}
+                    />
+                  </Box>
                 </>
               ) : (
-                <Typography variant="h5" fontWeight="bold" color="primary">
+                <Typography variant="h5" fontWeight="bold" color="black">
                   ${product.price}
                 </Typography>
               )}
             </Box>
 
-            {/* Количество */}
+            {/* Блок с количеством и кнопкой */}
             <Box display="flex" alignItems="center" marginY={2}>
               <IconButton onClick={handleDecrease} disabled={quantity <= 1}>
                 <RemoveIcon />
@@ -131,23 +110,42 @@ const ProductComponent = ({ productId, updateCart }) => {
               <IconButton onClick={handleIncrease}>
                 <AddIcon />
               </IconButton>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                sx={{ marginLeft: 3 }}
+                onClick={handleAddToCart}
+              >
+                Add {quantity} to Cart
+              </Button>
             </Box>
 
-            <Divider />
-
-            <Typography variant="body1" marginTop={2}>
-              {product.description}
-            </Typography>
-
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              sx={{ marginTop: 3 }}
-              onClick={handleAddToCart} // Добавляем товар в корзину
+            {/* Заголовок "Description" и описание продукта */}
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              marginTop={2}
             >
-              Add {quantity} to Cart
-            </Button>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontFamily: "Montserrat, sans-serif",
+                  fontWeight: "600",
+                  marginBottom: 0,
+                }}
+              >
+                Description
+              </Typography>
+              <Typography
+                variant="body1"
+                marginTop={0}
+                sx={{ marginTop: "4px" }}
+              >
+                {product.description}
+              </Typography>
+            </Box>
           </CardContent>
         </Grid>
       </Grid>

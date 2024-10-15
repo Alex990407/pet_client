@@ -8,12 +8,15 @@ import {
   Box,
 } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import SaleDetailsBlockComponent from "../../components/SaleDetailsBlockComponent"; // Компонент для отображения скидки
 import ProductFilterComponent from "../ProductFilterComponent";
 
-const DiscountedProducts = () => {
+const DiscountedProducts = ({ showFilter = true, limit, hideTitle }) => {
   const [discountedProducts, setDiscountedProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]); // Состояние для отфильтрованных продуктов
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -71,27 +74,40 @@ const DiscountedProducts = () => {
     setFilteredProducts(filtered); // Обновляем состояние отфильтрованных продуктов
   };
 
+  // Ограничиваем количество отображаемых продуктов
+  const displayedProducts = limit
+    ? filteredProducts.slice(0, limit)
+    : filteredProducts;
+
+  // Функция для навигации по продукту при клике
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`); // Переход на страницу продукта
+  };
+
   return (
     <Box sx={{ padding: { xs: "10px", sm: "20px" } }}>
-      <Typography
-        variant="h4"
-        component="h2"
-        sx={{
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: "bold",
-          fontSize: { xs: "1.5rem", sm: "2rem" },
-          marginBottom: "20px",
-          textAlign: "left",
-        }}
-      >
-        Discounted items
-      </Typography>
+      {!hideTitle && (
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: "bold",
+            fontSize: { xs: "1.5rem", sm: "2rem" },
+            marginBottom: "20px",
+            textAlign: "left",
+          }}
+        >
+          Discounted items
+        </Typography>
+      )}
 
       {/* Добавляем компонент фильтрации */}
-      <ProductFilterComponent onFilter={handleFilter} />
+      {/* Условный рендеринг фильтра */}
+      {showFilter && <ProductFilterComponent onFilter={handleFilter} />}
 
       <Grid container spacing={2}>
-        {filteredProducts.map((product) => (
+        {displayedProducts.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={3} lg={3}>
             <Card
               sx={{
@@ -102,7 +118,9 @@ const DiscountedProducts = () => {
                 boxShadow: "none",
                 textAlign: "center",
                 position: "relative",
+                cursor: "pointer",
               }}
+              onClick={() => handleProductClick(product.id)} // Добавляем обработчик клика
             >
               {product.discont_price && (
                 <Box

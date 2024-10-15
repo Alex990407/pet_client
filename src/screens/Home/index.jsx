@@ -3,6 +3,8 @@ import { Box, Typography, Button } from "@mui/material";
 import homeImage from "../../assets/home_bg.png"; // Импортируем изображение
 import CategoriesComponent from "../../components/CategoriesComponent/index";
 import TitleLineButton from "../../components/TitleLineButton";
+import BannerComponent from "../../components/HomeBannerComponent/BannerComponent";
+import DiscountedProducts from "../../components/DiscountedProductsComponent/index";
 
 const Home = () => {
   return (
@@ -86,7 +88,18 @@ const Home = () => {
           linkLabel="All categories"
           linkUrl="/categories"
         >
-          <CategoriesComponent limit={4} /> {/* Ограничиваем категории до 4 */}
+          <CategoriesComponent limit={4} hideTitle={true} />{" "}
+          {/* Ограничиваем категории до 4 */}
+        </TitleLineButton>
+      </Box>
+      {/* Компонент баннера */}
+      <BannerComponent />
+
+      {/* Добавляем отображение 4 продуктов со скидкой */}
+      <Box sx={{ padding: "20px" }}>
+        <TitleLineButton title="Sale" linkLabel="All sales" linkUrl="/allSales">
+          <DiscountedProducts limit={4} showFilter={false} hideTitle={true} />{" "}
+          {/* Ограничиваем до 4 продуктов */}
         </TitleLineButton>
       </Box>
     </>

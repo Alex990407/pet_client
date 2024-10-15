@@ -1,3 +1,5 @@
+// ===========          0=====0===============================
+
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import instagramIcon from "../../assets/icons/instagram.svg";
@@ -9,8 +11,9 @@ const Footer = () => {
     <Box
       sx={{
         backgroundColor: "white",
+        marginTop: "10px",
         padding: "32px 0",
-        borderTop: "2px solid #ccc", // Верхняя граница
+        // borderTop: "2px solid #ccc", // Верхняя граница
       }}
     >
       <Box

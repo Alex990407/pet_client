@@ -28,7 +28,7 @@ const TitleLineButton = ({ title, linkLabel, linkUrl, children }) => {
         >
           {title}
         </Typography>
-        {/* <Typography variant="h2">{title}</Typography> */}
+
         <Divider sx={{ flexGrow: 1, ml: 4 }} />
         <StyledLink to={linkUrl}>{linkLabel}</StyledLink>
       </Box>

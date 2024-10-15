@@ -1,9 +1,49 @@
+// import React from "react";
+// import { Box, Typography } from "@mui/material";
+
+// // Компонент для отображения процентов скидки
+// const SaleDetailsBlockComponent = ({ price, discountPrice }) => {
+//   console.log(price);
+//   // Вычисляем процент скидки
+//   const discountPercentage = Math.round(
+//     ((price - discountPrice) / price) * 100
+//   );
+
+//   return (
+//     <Box
+//       sx={{
+//         width: "45px",
+//         height: "25px",
+//         backgroundColor: "blue", // Синий фон
+//         color: "white", // Белый текст
+//         borderRadius: "6px", // Скругленные углы
+//         padding: "8px 16px", // Внутренние отступы
+//         display: "inline-block", // Блок занимает только необходимое место
+//         textAlign: "center", // Центрируем текст
+//       }}
+//     >
+//       <Typography
+//         variant="h6"
+//         component="span"
+//         sx={{
+//           fontWeight: 700, // Жирный текст
+//           fontSize: "1rem", // Размер шрифта
+//           fontFamily: "Montserrat, sans-serif", // Шрифт
+//         }}
+//       >
+//         {discountPercentage}%
+//       </Typography>
+//     </Box>
+//   );
+// };
+
+// export default SaleDetailsBlockComponent;
+
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
 // Компонент для отображения процентов скидки
 const SaleDetailsBlockComponent = ({ price, discountPrice }) => {
-  console.log(price);
   // Вычисляем процент скидки
   const discountPercentage = Math.round(
     ((price - discountPrice) / price) * 100
@@ -12,22 +52,22 @@ const SaleDetailsBlockComponent = ({ price, discountPrice }) => {
   return (
     <Box
       sx={{
-        width: "45px",
-        height: "25px",
+        width: "30px", // Уменьшенная ширина
+        height: "18px", // Уменьшенная высота
         backgroundColor: "blue", // Синий фон
         color: "white", // Белый текст
-        borderRadius: "6px", // Скругленные углы
-        padding: "8px 16px", // Внутренние отступы
+        borderRadius: "5px", // Скругленные углы немного меньше
+        padding: "2px 6px", // Уменьшенные внутренние отступы
         display: "inline-block", // Блок занимает только необходимое место
         textAlign: "center", // Центрируем текст
       }}
     >
       <Typography
-        variant="h6"
+        variant="body2" // Уменьшенный размер текста
         component="span"
         sx={{
           fontWeight: 700, // Жирный текст
-          fontSize: "1rem", // Размер шрифта
+          fontSize: "0.7rem", // Немного уменьшенный размер шрифта
           fontFamily: "Montserrat, sans-serif", // Шрифт
         }}
       >

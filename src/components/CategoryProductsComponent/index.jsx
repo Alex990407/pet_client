@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Typography,
   Card,
@@ -7,41 +7,13 @@ import {
   Grid,
   Box,
 } from "@mui/material";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import SaleDetailsBlockComponent from "../SaleDetailsBlockComponent";
-import ProductFilterComponent from "../ProductFilterComponent"; // Импортируем компонент фильтрации
-import { useNavigate } from "react-router-dom"; // Импортируем useNavigate для навигации
+import ProductFilterComponent from "../ProductFilterComponent";
 
-const CategoryProductsComponent = ({ id, limit }) => {
-  const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+const CategoryProductsComponent = ({ products, category }) => {
+  const [filteredProducts, setFilteredProducts] = React.useState(products); // Используем переданные продукты
   const navigate = useNavigate();
-
-  // Запрос на бэкенд для получения продуктов по категории
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3333/categories/${id}`) // Используем id для запроса продуктов категории
-      .then((response) => {
-        const fetchedCategory = limit
-          ? response.data.category.slice(0, limit)
-          : response.data.category;
-
-        setCategory(fetchedCategory);
-
-        const fetchedProducts = limit
-          ? response.data.data.slice(0, limit)
-          : response.data.data;
-
-        setProducts(fetchedProducts); // Сохраняем продукты в состоянии
-        setFilteredProducts(fetchedProducts); // Инициализируем отфильтрованные продукты
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
-
-    // console.log(products);
-  }, [id, limit]);
 
   // Функция фильтрации
   const handleFilter = (filters) => {
@@ -106,19 +78,18 @@ const CategoryProductsComponent = ({ id, limit }) => {
       </Typography>
       {/* Добавляем компонент фильтрации */}
       <ProductFilterComponent onFilter={handleFilter} /> {/* Сетка продуктов */}
-      {/* Сетка продуктов */}
       <Grid container spacing={2}>
         {filteredProducts.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={3} lg={3}>
             <Card
               sx={{
-                width: "100%", // Карточка адаптируется к размеру сетки
+                width: "100%",
                 height: "100%",
                 borderRadius: "12px",
                 border: "1px solid rgba(221, 221, 221, 1)",
                 boxShadow: "none",
                 textAlign: "center",
-                position: "relative", // Позиционируем карточку
+                position: "relative",
                 cursor: "pointer",
               }}
               onClick={() => handleProductClick(product.id)} // Добавляем обработчик клика
@@ -127,10 +98,10 @@ const CategoryProductsComponent = ({ id, limit }) => {
               {product.discont_price && (
                 <Box
                   sx={{
-                    position: "absolute", // Позволяет позиционировать элемент
-                    top: "16px", // Отступ сверху
-                    right: "16px", // Отступ справа
-                    zIndex: 1, // Скидка поверх контента
+                    position: "absolute",
+                    top: "16px",
+                    right: "16px",
+                    zIndex: 1,
                   }}
                 >
                   <SaleDetailsBlockComponent
@@ -142,11 +113,11 @@ const CategoryProductsComponent = ({ id, limit }) => {
 
               <CardMedia
                 component="img"
-                image={"http://localhost:3333/" + product.image}
+                image={`http://localhost:3333/${product.image}`}
                 alt={product.title}
                 sx={{
-                  width: "100%", // Ширина карточки
-                  height: { xs: "200px", sm: "220px", md: "240px" }, // Уменьшенные размеры изображения
+                  width: "100%",
+                  height: { xs: "200px", sm: "220px", md: "240px" },
                   borderRadius: "8px",
                   objectFit: "cover",
                   objectPosition: "center",
