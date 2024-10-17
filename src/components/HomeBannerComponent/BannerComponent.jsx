@@ -13,6 +13,7 @@ const BannerComponent = () => {
         flexDirection: "column",
         alignItems: "center",
         marginTop: "40px", // Отступ сверху
+        marginLeft: "40px",
         padding: { xs: "20px", sm: "30px", md: "40px" }, // Адаптивные отступы
         borderRadius: "8px", // Скругляем углы
         position: "relative", // Относительное позиционирование для изображения
